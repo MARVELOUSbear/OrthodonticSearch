@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+        <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+</head>
+<body>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">Info</p>
+            <div class="list-group">
+                <li class="list-group-item ">{{r["_source"]["date"]}}</li>
+                <li class="list-group-item ">Author:
+                         <ul>
+                        {% for author in r["_source"]["authors"] %}
+                        <li class="author-group">{{author}}</li>
+                        {% endfor %}
+                        </ul>
+                </li>
+                
+                <li class="list-group-item">PMID: {{r["_source"]["pmid"]}}</li>
+                <li class="list-group-item">DOI: {{r["_source"]["doi"]}}</li>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="card mb-4" >
+                <div class="card-body">
+                    
+                    <h4 class="card-title">{{r["_source"]["title"]}}</h4>
+
+                    <p class="card-text mt-5">{{r["_source"]["abstract"]}}</p>
+                    <hr>
+                    {% if r["_source"]["url"] %}
+                        <a href="{{r['_source']['url']}}"   class="btn btn-outline-primary ">Go to the article</a>
+                    {% else %}
+                    <blockquote class="blockquote mb-0">
+                    <p > Full article is not accessible through NCBI database</p>
+                    </blockquote>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+</body>
+</html>
